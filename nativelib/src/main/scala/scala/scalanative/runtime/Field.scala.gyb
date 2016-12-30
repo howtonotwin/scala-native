@@ -1,0 +1,21 @@
+package scala.scalanative
+package runtime
+
+import scalanative.native._
+
+% for N in range(1, 23):
+%   Fn = "F" + str(N)
+%   Fs = ", ".join(["F" + str(i) for i in range(1, N + 1)])
+
+sealed abstract class Field${N}[P, F]
+
+object Field${N} {
+  implicit def CStruct${N}[${Fs}]: Field${N}[CStruct${N}[${Fs}], ${Fn}] =
+    new Field${N}[CStruct${N}[${Fs}], ${Fn}] {}
+
+  implicit def CUnion${N}[${Fs}]: Field${N}[CUnion${N}[${Fs}], ${Fn}] =
+    new Field${N}[CUnion${N}[${Fs}], ${Fn}] {}
+}
+
+% end
+

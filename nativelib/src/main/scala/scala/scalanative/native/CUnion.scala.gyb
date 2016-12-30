@@ -1,0 +1,10 @@
+package scala.scalanative
+package native
+
+% for N in range(0, 23):
+%    extends = "" if N == 0 else "extends CUnion" + str(N - 1)
+%    Ts = "" if N == 0 else "[" + ", ".join(["T" + str(i) for i in range(1, N + 1)]) + "]"
+
+sealed abstract class CUnion${N}${Ts} ${extends}
+
+% end
